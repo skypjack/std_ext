@@ -16,10 +16,10 @@ namespace details {
 template<
     typename R,
     typename... A,
-    std::size_t... I,
-    std::enable_if_t<(sizeof...(I)<=sizeof...(A))>* = nullptr
+    std::size_t... I
 > constexpr auto
 func(std::integer_sequence<std::size_t, I...>) {
+    static_assert((sizeof...(I)<=sizeof...(A)), "!");
     return std::function<R(std::tuple_element_t<I, std::tuple<A...>>...)>{};
 }
 

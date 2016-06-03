@@ -12,13 +12,13 @@ namespace details {
 
 /** \internal */
 template<typename H, typename... T, typename U, std::size_t... I>
-constexpr std::enable_if_t<
-    std::is_same<
-        std::remove_reference_t<std::remove_cv_t<U>>,
-        std::tuple<H, T...>
-    >::value,
-    std::tuple<T...>
-> tail(U &&tup, std::index_sequence<I...>) {
+constexpr std::tuple<T...>
+tail(U &&tup, std::index_sequence<I...>) {
+    static_assert(std::is_same<
+                      std::remove_reference_t<std::remove_cv_t<U>>,
+                      std::tuple<H, T...>
+                  >::value, "!");
+
     return std::make_tuple(std::get<I+1>(std::forward<U>(tup))...);
 }
 
