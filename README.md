@@ -189,6 +189,25 @@ constexpr bool actual_type_name_v = actual_type_name<A...>::value;
     >::value; // true
     ```
 
+* `inherit_from`
+
+    ```
+    std::is_same<
+        inherit_from_t<const int ** const &&, char>,
+        types<int, const char ** const &&>
+    >::value
+
+    std::is_same<
+        inherit_from_basic_t<int const **[][3][5], double>,
+        int
+    >::value
+
+    std::is_same<
+        inherit_from_decorated_t<int const **[][3][5], double>,
+        double const **[][3][5]
+    >::value
+    ```
+
 Please, note that all the types above mentioned are provided along with their
 *helper type templates*, similar to the ones available in the
 **Standard Template Library** (mostly since C++14).<br/>

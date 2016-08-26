@@ -46,3 +46,60 @@ TEST(FUNCTION_PROXY, type) {
                     function_proxy_t<2, FuncA>
                  >::value));
 }
+
+TEST(INHERIT_FROM, functionalities) {
+    ASSERT_TRUE((std::is_same<
+                     inherit_from_t<const int ** const &&, char>,
+                     types<int, const char ** const &&>
+                 >::value));
+
+    ASSERT_TRUE((std::is_same<
+                     inherit_from_t<int, int>,
+                     types<int, int>
+                 >::value));
+
+    ASSERT_TRUE((std::is_same<
+                     inherit_from_t<int const, int>,
+                     types<int, int const>
+                 >::value));
+
+    ASSERT_TRUE((std::is_same<
+                     inherit_from_t<int *, int>,
+                     types<int, int *>
+                 >::value));
+
+    ASSERT_TRUE((std::is_same<
+                     inherit_from_t<int **, double>,
+                     types<int, double **>
+                 >::value));
+
+    ASSERT_TRUE((std::is_same<
+                     inherit_from_t<int *&, int>,
+                     types<int, int *&>
+                 >::value));
+
+    ASSERT_TRUE((std::is_same<
+                     inherit_from_t<int **&, float>,
+                     types<int, float **&>
+                 >::value));
+
+    ASSERT_TRUE((std::is_same<
+                     inherit_from_t<int [3], char>,
+                     types<int, char [3]>
+                 >::value));
+
+    ASSERT_TRUE((std::is_same<
+                     inherit_from_t<int [], int>,
+                     types<int, int []>
+                 >::value));
+
+    ASSERT_TRUE((std::is_same<
+                     inherit_from_t<int [][3], double>,
+                     types<int, double [][3]>
+                 >::value));
+
+    ASSERT_TRUE((std::is_same<
+                     inherit_from_t<int const **[][3][5], int>,
+                     types<int, int const **[][3][5]>
+                 >::value));
+}
