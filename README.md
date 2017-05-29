@@ -186,7 +186,7 @@ constexpr bool actual_type_name_v = actual_type_name<A...>::value;
     std::is_same<
         typename function_proxy<1, void(int, char, double)>::type,
         std::function<void(int)>
-    >::value; // true
+    >::value;
     ```
 
 * `inherit_from`
