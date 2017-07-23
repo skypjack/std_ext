@@ -17,7 +17,7 @@ Examples of the above mentioned functionalities are:
 
 * **are_same**
 
-    ```
+    ```cpp
     struct S { };
     struct T { };
     static_assert(not are_same<S, T, S>::value, "are not all the same")
@@ -25,7 +25,7 @@ Examples of the above mentioned functionalities are:
 
 * **is_base_of_all**
 
-    ```
+    ```cpp
     struct B { };
     struct D: B { };
     struct C: B { };
@@ -34,7 +34,7 @@ Examples of the above mentioned functionalities are:
 
 * **tail**
 
-    ```
+    ```cpp
     std::tuple<int, double> tup{};
     auto t = tail(tup);
     assert((std::is_same<decltype(t), std::tuple<double>>::value));
@@ -59,7 +59,7 @@ See the files in `src` for further details.
 
 The documentation is available by means of `cmake`.<br/>
 Be sure to have `doxygen` installed and use the following commands:
-```
+```sh
 cd build
 cmake ..
 make docs
@@ -74,7 +74,7 @@ List of currently available facilities and classes.
 
 * `tail`
 
-    ```
+    ```cpp
     template<typename H, typename... T>
     constexpr std::tuple<T...> tail(std::tuple<H, T...> &tup);
 
@@ -84,7 +84,7 @@ List of currently available facilities and classes.
 
 * `invoke`
 
-    ```
+    ```cpp
     template<typename F, typename... T>
     constexpr auto invoke(F &&f, std::tuple<T...> &tup);
     ```
@@ -166,14 +166,14 @@ Please, note that all the types above mentioned are provided along with their
 As an example, the helper variable template for the `is_same_of_any` type is
 defined as:
 
-```
+```cpp
 template<class... A>
 constexpr bool is_same_of_any_v = is_same_of_any<A...>::value;
 ```
 
 More in general, all those helpers are defined as:
 
-```
+```cpp
 template<class... A>
 constexpr bool actual_type_name_v = actual_type_name<A...>::value;
 ```
@@ -182,7 +182,7 @@ constexpr bool actual_type_name_v = actual_type_name<A...>::value;
 
 * `function_proxy`
 
-    ```
+    ```cpp
     std::is_same<
         typename function_proxy<1, void(int, char, double)>::type,
         std::function<void(int)>
@@ -191,7 +191,7 @@ constexpr bool actual_type_name_v = actual_type_name<A...>::value;
 
 * `inherit_from`
 
-    ```
+    ```cpp
     std::is_same<
         inherit_from_t<const int ** const &&, char>,
         types<int, const char ** const &&>
@@ -214,14 +214,14 @@ Please, note that all the types above mentioned are provided along with their
 As an example, the helper variable template for the `function_proxy` type is
 defined as:
 
-```
+```cpp
 template<std::size_t N, typename F>
 using function_proxy_t = typename function_proxy<N, F>::type;
 ```
 
 More in general, all those helpers are defined as:
 
-```
+```cpp
 template<class... A>
 using actual_type_name_t = typename actual_type_name<A...>::type;
 ```
